@@ -13,23 +13,50 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ApiGuestController extends AbstractController
 {
     /**
-     * @param Request $request
-     * @param GuestService $guestService
-     * @param SerializerInterface $serializer
+     * @param string $email
      * @return Response
      */
-    #[Route('/api/guest', name: 'api_guest',methods: 'POST')]
-    public function createGuest(Request $request, GuestService $guestService, SerializerInterface $serializer): Response
+    #[Route('/api/guest/{email}', name: 'api_guest_get',methods: 'GET')]
+    public function getGuest(string $email) : Response
     {
+        if (!$email) {
+           return $this->json('please provide email address', Response::HTTP_BAD_REQUEST);
+        }
 
-        $guest = $serializer->deserialize($request->getContent(), Guest::class, 'json');
+        $guest = $this->getDoctrine()
+            ->getRepository(Guest::class)
+            ->findOneBy(['email' => $email]);
+
+        if (!$guest) {
+            return $this->json('no guest found', Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->json($guest, Response::HTTP_OK);
+    }
+
+    /**
+     * @param string $id
+     * @param Request $request
+     * @param GuestService $guestService
+     * @return Response
+     */
+    #[Route('/api/guest/{id}', name: 'api_guest_put',methods: 'PUT')]
+    public function updateGuest(string $id, Request $request, GuestService $guestService): Response
+    {
+        if(!$id) {
+            return $this->json('please provide user id', Response::HTTP_BAD_REQUEST);
+        }
+
+        if(!$data = json_decode($request->getContent(), true)) {
+            return $this->json('no data to update', Response::HTTP_BAD_REQUEST);
+        }
 
         try {
-            $guestService->createGuest($guest);
+            $guest = $guestService->updateGuest($id, $data);
         } catch (\Exception $exception) {
             return $this->json($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->json('created', Response::HTTP_CREATED);
+        return $this->json($guest, Response::HTTP_CREATED);
     }
 }
