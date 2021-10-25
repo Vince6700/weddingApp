@@ -5,21 +5,28 @@ namespace App\service;
 use App\Entity\Guest;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class GuestService
 {
     protected EntityManagerInterface $entityManager;
     protected ValidatorInterface $validator;
+    protected SerializerInterface $serializer;
 
     /**
      * @param EntityManagerInterface $entityManager
      * @param ValidatorInterface $validator
+     * @param SerializerInterface $serializer
      */
-    public function __construct(EntityManagerInterface $entityManager, ValidatorInterface $validator)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ValidatorInterface $validator,
+        SerializerInterface $serializer,
+    ){
         $this->entityManager = $entityManager;
         $this->validator = $validator;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -38,6 +45,34 @@ class GuestService
         $this->entityManager->flush();
 
         return $guest;
+    }
+
+    /**
+     * @param Guest[] $guests
+     * @return array
+     * @throws Exception
+     */
+    public function createGuests(array $guests) : array
+    {
+        $errors = [];
+        foreach ($guests as $guest) {
+            $error = $this->validator->validate($guest);
+            if (count($error) > 0) {
+                $errors[] = $error;
+            }
+        }
+
+        if (count($errors) > 0) {
+            throw new Exception($this->serializer->serialize($errors, 'json'));
+        }
+
+        foreach ($guests as $guest) {
+            $this->entityManager->persist($guest);
+        }
+
+        $this->entityManager->flush();
+
+        return $guests;
     }
 
     /**
@@ -64,6 +99,28 @@ class GuestService
         $guest->setAdults($data['children'] ?? $guest->getChildren());
         $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
 
+        $this->entityManager->flush();
+
+        return $guest;
+    }
+
+    /**
+     * @param string $id
+     * @return Guest
+     * @throws Exception
+     */
+    public function deleteGuest(string $id) : Guest
+    {
+        /** @var Guest $guest */
+        $guest = $this->entityManager
+            ->getRepository(Guest::class)
+            ->find($id);
+
+        if (!$guest) {
+            throw new Exception('No guest found for id '.$id);
+        }
+
+        $this->entityManager->remove($guest);
         $this->entityManager->flush();
 
         return $guest;
