@@ -17,12 +17,21 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ApiAdminGuestController extends AbstractController
 {
     /**
+     * @return Response
+     */
+    #[Route('/api/adminGuest', name: 'api_admin_guest_get', methods: 'GET')]
+    public function getGuests(): Response
+    {
+        return $this->json($this->getDoctrine()->getRepository(Guest::class)->findAll(), Response::HTTP_OK);
+    }
+
+    /**
      * @param Request $request
      * @param GuestService $guestService
      * @param SerializerInterface $serializer
      * @return Response
      */
-    #[Route('/api/adminGuest', name: 'api_admin_guest', methods: 'POST')]
+    #[Route('/api/adminGuest', name: 'api_admin_guest_post', methods: 'POST')]
     public function createGuest(Request $request, GuestService $guestService, SerializerInterface $serializer): Response
     {
         $guest = $serializer->deserialize($request->getContent(), Guest::class, 'json');
@@ -41,7 +50,7 @@ class ApiAdminGuestController extends AbstractController
      * @param GuestService $guestService
      * @return Response
      */
-    #[Route('/api/adminGuests', name: 'api_admin_guests', methods: 'POST')]
+    #[Route('/api/adminGuests', name: 'api_admin_guests_post', methods: 'POST')]
     public function createMultipleGuests(Request $request, GuestService $guestService): Response
     {
         $serializer = new Serializer(
@@ -66,7 +75,7 @@ class ApiAdminGuestController extends AbstractController
      * @param GuestService $guestService
      * @return Response
      */
-    #[Route('/api/adminGuest/{id}', name: 'api_admin_guest', methods: 'DELETE')]
+    #[Route('/api/adminGuest/{id}', name: 'api_admin_guest_delete', methods: 'DELETE')]
     public function deleteGuest(string $id, GuestService $guestService): Response
     {
         if (!$id) {
@@ -81,4 +90,6 @@ class ApiAdminGuestController extends AbstractController
 
         return $this->json($guest, Response::HTTP_OK);
     }
+
+    /** todo edit guest */
 }
