@@ -91,5 +91,23 @@ class ApiAdminGuestController extends AbstractController
         return $this->json($guest, Response::HTTP_OK);
     }
 
-    /** todo edit guest */
+    #[Route('/api/adminGuest/{id}', name: 'api_admin_guest_patch', methods: 'PATCH')]
+    public function editGuest (string $id, Request $request, GuestService $guestService): Response
+    {
+        if (!$id) {
+            return $this->json('please provide a guest id', Response::HTTP_BAD_REQUEST);
+        }
+
+        if(!$data = json_decode($request->getContent(), true)) {
+            return $this->json('no data to update', Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $guest = $guestService->editGuest($id, $data);
+        } catch (\Exception $exception) {
+            return $this->json($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->json($guest, Response::HTTP_OK);
+    }
 }

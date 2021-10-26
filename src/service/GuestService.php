@@ -92,11 +92,8 @@ class GuestService
             throw new Exception('No guest found for id '.$id);
         }
 
-        $guest->setEmail($data['email'] ?? $guest->getEmail());
-        $guest->setFirstName($data['firstName'] ?? $guest->getFirstName());
-        $guest->setName($data['name'] ?? $guest->getName());
         $guest->setAdults($data['adults'] ?? $guest->getAdults());
-        $guest->setAdults($data['children'] ?? $guest->getChildren());
+        $guest->setChildren($data['children'] ?? $guest->getChildren());
         $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
 
         $this->entityManager->flush();
@@ -121,6 +118,38 @@ class GuestService
         }
 
         $this->entityManager->remove($guest);
+        $this->entityManager->flush();
+
+        return $guest;
+    }
+
+    /**
+     * @param string $id
+     * @param array $data
+     * @return Guest|null
+     * @throws Exception
+     */
+    public function editGuest(string $id, array $data): ?Guest
+    {
+        /** @var Guest $guest */
+        $guest = $this->entityManager
+            ->getRepository(Guest::class)
+            ->find($id);
+
+        if (!$guest) {
+            throw new Exception('No guest found for id '.$id);
+        }
+
+        $guest->setName($data['name'] ?? $guest->getName());
+        $guest->setFirstName($data['firstName'] ?? $guest->getFirstName());
+        $guest->setEmail($data['email'] ?? $guest->getEmail());
+        $guest->setAdults($data['adults'] ?? $guest->getAdults());
+        $guest->setChildren($data['children'] ?? $guest->getChildren());
+        $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
+        $guest->setDrink($data['drink'] ?? $guest->getDrink());
+        $guest->setEmailSent($data['emailSent'] ?? $guest->getEmailSent());
+        $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
+
         $this->entityManager->flush();
 
         return $guest;
