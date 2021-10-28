@@ -78,14 +78,10 @@ class ApiAdminGuestController extends AbstractController
     #[Route('/api/adminGuest/{id}', name: 'api_admin_guest_delete', methods: 'DELETE')]
     public function deleteGuest(string $id, GuestService $guestService): Response
     {
-        if (!$id) {
-            return $this->json('please provide a guest id', Response::HTTP_BAD_REQUEST);
-        }
-
         try {
             $guest = $guestService->deleteGuest($id);
         } catch (\Exception $exception) {
-            return $this->json($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $this->json($exception->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
         return $this->json($guest, Response::HTTP_OK);

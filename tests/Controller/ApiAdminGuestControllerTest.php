@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\Guest;
 use App\Repository\GuestRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -127,5 +128,64 @@ class ApiAdminGuestControllerTest extends WebTestCase
         $this->assertEquals("new.guest@mail.com", $guest->getEmail());
         $this->assertEquals("new.guestTwo@mail.com", $guest2->getEmail());
         $this->assertResponseStatusCodeSame(201);
+    }
+
+    public function testCreateMultipleGuestsValidationFails(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        /** @var GuestRepository $guestRepository */
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $client->request('POST', '/api/adminGuests', [],[],[],
+            '[
+            {"firstName": "new", "name": "guest", "drink": false, "adults": 2},
+            {"email": "new.guestTwo@mail.com", "firstName": "new", "name": "guest", "drink": false, "adults": 2}
+            ]'
+        );
+
+        $guest2 = $guestRepository->findOneBy(["email" => "new.guestTwo@mail.com"]);
+
+        $this->assertNull($guest2);
+        $this->assertResponseStatusCodeSame(400);
+    }
+
+    public function testDeleteGuest(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        /** @var GuestRepository $guestRepository */
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $guest = $guestRepository->findOneBy(["email" => "email0@mail.com"]);
+        $id = $guest->getId();
+
+        $client->request("DELETE", '/api/adminGuest/' . $id);
+
+        $guestDeleted = $guestRepository->find($id);
+
+        $this->assertNull($guestDeleted);
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testDeleteGuestNotFound(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        /** @var GuestRepository $guestRepository */
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $client->request("DELETE", '/api/adminGuest/100');
+
+        $this->assertResponseStatusCodeSame(404);
     }
 }
