@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\service\GuestMailService;
+use App\Service\GuestMailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

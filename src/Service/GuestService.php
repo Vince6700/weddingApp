@@ -1,6 +1,6 @@
 <?php
 
-namespace App\service;
+namespace App\Service;
 
 use App\Entity\Guest;
 use Doctrine\ORM\EntityManagerInterface;

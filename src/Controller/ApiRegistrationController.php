@@ -23,7 +23,7 @@ class ApiRegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('api/register', name: 'app_register',methods: "POST")]
+    #[Route('/api/register', name: 'app_register',methods: "POST")]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): JsonResponse
     {
         $data = json_decode($request->getContent(), true);

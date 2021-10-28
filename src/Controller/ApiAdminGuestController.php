@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Guest;
-use App\service\GuestService;
+use App\Service\GuestService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
