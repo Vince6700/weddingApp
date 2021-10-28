@@ -32,12 +32,12 @@ class ApiGuestControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request(
-            'PUT', '/api/guest/11', [],[],[],'{"confirm": true, "adults": 2, "children": 1}'
+            'PUT', '/api/guest/21', [],[],[],'{"confirm": true, "adults": 2, "children": 1}'
         );
 
         $guestRepository = static::getContainer()->get(GuestRepository::class);
         /** @var Guest $guest */
-        $guest = $guestRepository->find(11);
+        $guest = $guestRepository->find(21);
 
         $this->assertEquals(true, $guest->getConfirm());
         $this->assertEquals(2, $guest->getAdults());
@@ -49,7 +49,7 @@ class ApiGuestControllerTest extends WebTestCase
     public function testUpdateGuestBadRequest(): void
     {
         $client = static::createClient();
-        $client->request('PUT', '/api/guest/11');
+        $client->request('PUT', '/api/guest/21');
 
         $this->assertResponseStatusCodeSame(400);
     }
@@ -62,7 +62,6 @@ class ApiGuestControllerTest extends WebTestCase
         );
 
         $response = json_decode($client->getResponse()->getContent(), true);
-
 
         $this->assertEquals('No guest found for id 100', $response);
         $this->assertResponseStatusCodeSame(400);
