@@ -178,8 +178,6 @@ class ApiAdminGuestControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        /** @var GuestRepository $guestRepository */
-        $guestRepository = static::getContainer()->get(GuestRepository::class);
 
         $testUser = $userRepository->findOneByEmail('admin@admin.com');
         $client->loginUser($testUser);
@@ -187,5 +185,114 @@ class ApiAdminGuestControllerTest extends WebTestCase
         $client->request("DELETE", '/api/adminGuest/100');
 
         $this->assertResponseStatusCodeSame(404);
+    }
+
+    public function testGuestPatch(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $guest = $guestRepository->findOneBy(["email" => "email0@mail.com"]);
+        $id = $guest->getId();
+
+
+        $client->request('PATCH', '/api/adminGuest/' . $id,[], [], [],
+            '{
+                "email": "modified@mail.com",
+                "name": "modified",
+                "firstName": "modified",
+                "adults": 2,
+                "children": 2,
+                "drink": true,
+                "confirm": true,
+                "emailSent": true
+            }'
+        );
+
+        /** @var Guest $guestModified */
+        $guestModified = $guestRepository->find($id);
+
+        $this->assertEquals("modified@mail.com", $guestModified->getEmail());
+        $this->assertEquals("modified", $guestModified->getName());
+        $this->assertEquals("modified", $guestModified->getFirstName());
+        $this->assertEquals(2, $guestModified->getAdults());
+        $this->assertEquals(2, $guestModified->getChildren());
+        $this->assertEquals(true, $guestModified->getConfirm());
+        $this->assertEquals(true, $guestModified->getEmailSent());
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testGuestPatchNoData(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $guest = $guestRepository->findOneBy(["email" => "email0@mail.com"]);
+        $id = $guest->getId();
+
+
+        $client->request('PATCH', '/api/adminGuest/' . $id);
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals('no data to update', $response);
+        $this->assertResponseStatusCodeSame(400);
+    }
+
+    public function testGuestPatchNotFound(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $client->request('PATCH', '/api/adminGuest/100',[], [], [],
+            '{
+                "email": "modified@mail.com",
+                "name": "modified",
+                "firstName": "modified",
+                "adults": 2,
+                "children": 2,
+                "drink": true,
+                "confirm": true,
+                "emailSent": true
+            }'
+        );
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals('No guest found for id 100', $response);
+        $this->assertResponseStatusCodeSame(400);
+    }
+
+    public function testGuestPatchInvalidEmail(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $testUser = $userRepository->findOneByEmail('admin@admin.com');
+        $client->loginUser($testUser);
+
+        $guest = $guestRepository->findOneBy(["email" => "email0@mail.com"]);
+        $id = $guest->getId();
+
+
+        $client->request('PATCH', '/api/adminGuest/' . $id,[], [], [],
+            '{
+                "email": "modified.com"
+            }'
+        );
+
+        $this->assertResponseStatusCodeSame(400);
     }
 }

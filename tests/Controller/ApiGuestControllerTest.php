@@ -31,13 +31,18 @@ class ApiGuestControllerTest extends WebTestCase
     public function testUpdateGuest(): void
     {
         $client = static::createClient();
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $guest = $guestRepository->findOneBy(["email" => "email0@mail.com"]);
+        $id = $guest->getId();
+
         $client->request(
-            'PUT', '/api/guest/21', [],[],[],'{"confirm": true, "adults": 2, "children": 1}'
+            'PUT', '/api/guest/' . $id, [],[],[],'{"confirm": true, "adults": 2, "children": 1}'
         );
 
         $guestRepository = static::getContainer()->get(GuestRepository::class);
         /** @var Guest $guest */
-        $guest = $guestRepository->find(21);
+        $guest = $guestRepository->find($id);
 
         $this->assertEquals(true, $guest->getConfirm());
         $this->assertEquals(2, $guest->getAdults());
@@ -49,7 +54,12 @@ class ApiGuestControllerTest extends WebTestCase
     public function testUpdateGuestBadRequest(): void
     {
         $client = static::createClient();
-        $client->request('PUT', '/api/guest/21');
+        $guestRepository = static::getContainer()->get(GuestRepository::class);
+
+        $guest = $guestRepository->findOneBy(["email" => "email0@mail.com"]);
+        $id = $guest->getId();
+
+        $client->request('PUT', '/api/guest/' . $id);
 
         $this->assertResponseStatusCodeSame(400);
     }

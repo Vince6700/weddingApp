@@ -96,6 +96,12 @@ class GuestService
         $guest->setChildren($data['children'] ?? $guest->getChildren());
         $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
 
+        $errors = $this->validator->validate($guest);
+
+        if (count($errors) > 0) {
+            throw new Exception($errors);
+        }
+
         $this->entityManager->flush();
 
         return $guest;
@@ -149,6 +155,12 @@ class GuestService
         $guest->setDrink($data['drink'] ?? $guest->getDrink());
         $guest->setEmailSent($data['emailSent'] ?? $guest->getEmailSent());
         $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
+
+        $errors = $this->validator->validate($guest);
+
+        if (count($errors) > 0) {
+            throw new Exception($errors);
+        }
 
         $this->entityManager->flush();
 
