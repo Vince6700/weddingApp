@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-class RegistrationController extends AbstractController
+class ApiRegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
@@ -24,7 +23,7 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('api/register', name: 'app_register',methods: "POST")]
+    #[Route('/api/register', name: 'app_register',methods: "POST")]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): JsonResponse
     {
         $data = json_decode($request->getContent(), true);

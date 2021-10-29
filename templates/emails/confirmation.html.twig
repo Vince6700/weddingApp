@@ -1,0 +1,37 @@
+{% apply inline_css %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Zen Kaku Gothic Antique', sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        img {
+            width: 100%;
+        }
+        .title_container {
+            display: flex;
+            justify-content: center;
+        }
+        .body_container {
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <div>
+        <img src="{{ email.image('@images/mail_banner.jpeg') }}" alt="Logo">
+    </div>
+    <div class="title_container">
+        <h1>Merci {{ firstName }}, pour ta venue au mariage des Bibiches</h1>
+    </div>
+    <div class="body_container">
+        {% if drink %}
+            test
+        {% else %}
+            repas
+        {% endif %}
+    </div>
+{% endapply %}
