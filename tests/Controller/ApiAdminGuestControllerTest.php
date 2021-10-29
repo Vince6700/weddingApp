@@ -9,6 +9,24 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApiAdminGuestControllerTest extends WebTestCase
 {
+    public function testControllerIsSecured(): void
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/api/adminGuest');
+
+        $this->assertResponseStatusCodeSame(401);
+    }
+
+    public function testControllerCreateGuestsIsSecured(): void
+    {
+        $client = static::createClient();
+
+        $client->request('POST', '/api/adminGuests');
+
+        $this->assertResponseStatusCodeSame(401);
+    }
+
     public function testGetGuests(): void
     {
         $client = static::createClient();
@@ -23,15 +41,6 @@ class ApiAdminGuestControllerTest extends WebTestCase
 
         $this->assertCount(10, $response);
         $this->assertResponseIsSuccessful();
-    }
-
-    public function testGetGuestsForbidden(): void
-    {
-        $client = static::createClient();
-
-        $client->request('GET', '/api/adminGuest');
-
-        $this->assertResponseStatusCodeSame(401);
     }
 
     public function testCreateGuest(): void

@@ -40,4 +40,6 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/api/adminGuest, roles: ROLE_ADMIN }
+        - { path: ^/api/adminGuests, roles: ROLE_ADMIN }
+        - { path: ^/api/sendInvitation, roles: ROLE_ADMIN }
 
