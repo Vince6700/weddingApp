@@ -5,8 +5,8 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Home from "./Home";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import Index from "./Index";
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(<Index />, document.getElementById("root"));
