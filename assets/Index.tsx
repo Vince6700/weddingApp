@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { themeOptions } from "./theme";
 import Layout from "./components/Layout";
 import GuestProvider from "./context/guestProvider";
+import Invitation from "./Invitation";
 
 const Index = () => {
   const theme = createTheme(themeOptions);
@@ -15,8 +16,11 @@ const Index = () => {
         <Layout>
           <RouterDom>
             <Switch>
-              <Route path="/">
+              <Route exact path="/">
                 <Home />
+              </Route>
+              <Route exact path="/invitation">
+                <Invitation />
               </Route>
             </Switch>
           </RouterDom>

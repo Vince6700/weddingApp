@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import useGuest from "./hooks/useGuest";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -16,6 +17,7 @@ const Home = () => {
     actions: { fetchGuest },
     error,
   } = useGuest();
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -23,7 +25,7 @@ const Home = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      fetchGuest(values.email);
+      fetchGuest(values.email).then(() => history.push("/invitation"));
     },
   });
 
