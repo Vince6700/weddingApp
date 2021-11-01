@@ -43,5 +43,17 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          "&:before": {
+            borderTop: "thin solid #febf4380",
+          },
+          "&:after": {
+            borderTop: "thin solid #febf4380",
+          },
+        },
+      },
+    },
   },
 };
