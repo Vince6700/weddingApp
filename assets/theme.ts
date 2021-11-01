@@ -16,6 +16,9 @@ export const themeOptions: ThemeOptions = {
       default: "#121212",
       paper: "#181818",
     },
+    text: {
+      primary: "#f8f8ff",
+    },
   },
   typography: {
     fontFamily: "Quicksand",
@@ -27,6 +30,18 @@ export const themeOptions: ThemeOptions = {
     },
     h3: {
       fontFamily: "Stalemate",
+    },
+    body1: {
+      color: "#FFF",
+    },
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderColor: "#febf4380",
+        },
+      },
     },
   },
 };

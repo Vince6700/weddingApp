@@ -14,10 +14,9 @@ const Layout = ({ children }: LayoutInterface) => {
         minWidth: "100%",
         minHeight: "100vh",
       }}
-      maxWidth="sm"
     >
       <Grid container>
-        <Grid sm={8} sx={{ minHeight: "100vh" }}>
+        <Grid item sm={8} sx={{ minHeight: "100vh" }}>
           <Box
             sx={{
               display: "flex",
@@ -30,14 +29,14 @@ const Layout = ({ children }: LayoutInterface) => {
             }}
           />
         </Grid>
-        <Grid sm={4}>
+        <Grid item sm={4}>
           <Grid container>
-            <Grid sm={12}>
+            <Grid item sm={12}>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  padding: "4rem 2rem",
+                  padding: "4rem 2rem 2rem 2rem",
                 }}
               >
                 <Typography component="h1" variant="h1" color="primary">
@@ -45,7 +44,22 @@ const Layout = ({ children }: LayoutInterface) => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid sm={12}>{children}</Grid>
+            <Grid item sm={12}>
+              <Box
+                sx={{
+                  margin: "0 2rem 2rem 2rem",
+                  padding: "2rem",
+                  border: "1px solid",
+                  borderColor: (theme) => {
+                    const color = theme.palette.primary.light;
+                    return `${color}10`;
+                  },
+                  borderRadius: "10px",
+                }}
+              >
+                {children}
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
