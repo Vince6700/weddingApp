@@ -1,5 +1,14 @@
 import useGuest from "./hooks/useGuest";
-import { Box, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import useQuery from "./hooks/useQuery";
@@ -28,6 +37,10 @@ const Invitation = () => {
     fetchGuest(email);
   };
 
+  const onConfirmInvitation = () => {
+    history.push("/confirm-invitation");
+  };
+
   return (
     <Box>
       <Box mb={2} display="flex" justifyContent="center">
@@ -45,6 +58,17 @@ const Invitation = () => {
             description="21H à la ferme de Rawez"
           />
         </>
+      )}
+      {!guest?.confirm && (
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={onConfirmInvitation}
+          >
+            Confirmer mon invitation
+          </Button>
+        </Box>
       )}
     </Box>
   );

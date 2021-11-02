@@ -6,6 +6,7 @@ import { themeOptions } from "./theme";
 import Layout from "./components/Layout";
 import GuestProvider from "./context/guestProvider";
 import Invitation from "./Invitation";
+import ConfirmInvitation from "./ConfirmInvitation";
 
 const Index = () => {
   const theme = createTheme(themeOptions);
@@ -21,6 +22,9 @@ const Index = () => {
               </Route>
               <Route exact path="/invitation">
                 <Invitation />
+              </Route>
+              <Route exact path="/confirm-invitation">
+                <ConfirmInvitation />
               </Route>
             </Switch>
           </RouterDom>
