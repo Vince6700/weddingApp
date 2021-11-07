@@ -57,12 +57,22 @@ class Guest
     /**
      * @ORM\Column(type="boolean", options={"default" : false})
      */
-    private ?bool $confirm=false;
+    private bool $confirm=false;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : false})
      */
     private bool $emailSent=false;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private string $comments;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private bool $responded=false;
 
     public function getId(): ?int
     {
@@ -161,6 +171,30 @@ class Guest
     public function setEmailSent(bool $emailSent): self
     {
         $this->emailSent = $emailSent;
+
+        return $this;
+    }
+
+    public function getComments(): ?string
+    {
+        return $this->comments;
+    }
+
+    public function setComments(?string $comments): self
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    public function getResponded(): ?bool
+    {
+        return $this->responded;
+    }
+
+    public function setResponded(bool $responded): self
+    {
+        $this->responded = $responded;
 
         return $this;
     }

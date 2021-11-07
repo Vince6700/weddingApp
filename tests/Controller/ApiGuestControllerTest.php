@@ -37,7 +37,7 @@ class ApiGuestControllerTest extends WebTestCase
         $id = $guest->getId();
 
         $client->request(
-            'PUT', '/api/guest/' . $id, [],[],[],'{"confirm": true, "adults": 2, "children": 1}'
+            'PUT', '/api/guest/' . $id, [],[],[],'{"confirm": true, "adults": 2, "children": 1, "comments": "comments"}'
         );
 
         $guestRepository = static::getContainer()->get(GuestRepository::class);
@@ -47,6 +47,8 @@ class ApiGuestControllerTest extends WebTestCase
         $this->assertEquals(true, $guest->getConfirm());
         $this->assertEquals(2, $guest->getAdults());
         $this->assertEquals(1, $guest->getChildren());
+        $this->assertEquals(true, $guest->getResponded());
+        $this->assertEquals('comments', $guest->getComments());
         $this->assertEmailCount(1);
         $this->assertResponseStatusCodeSame(201);
     }

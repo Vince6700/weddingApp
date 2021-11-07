@@ -1,14 +1,5 @@
 import useGuest from "./hooks/useGuest";
-import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Link, Theme, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import useQuery from "./hooks/useQuery";
@@ -41,9 +32,11 @@ const Invitation = () => {
     history.push("/confirm-invitation");
   };
 
+  //TODO: display summary
+
   return (
     <Box>
-      <Box mb={2} display="flex" justifyContent="center">
+      <Box mt={2} display="flex" justifyContent="center">
         <Typography component="h2" variant="h2" color="primary">
           Invitation
         </Typography>
@@ -59,7 +52,7 @@ const Invitation = () => {
           />
         </>
       )}
-      {!guest?.confirm && (
+      {!guest?.responded && (
         <Box display="flex" justifyContent="center" mt={4}>
           <Button
             variant="contained"
@@ -68,6 +61,29 @@ const Invitation = () => {
           >
             Confirmer mon invitation
           </Button>
+        </Box>
+      )}
+      {guest?.responded && (
+        <Box mt={2}>
+          <Divider
+            sx={{
+              mt: 2,
+              mb: 2,
+              backgroundColor: (theme: Theme) =>
+                `${theme.palette.primary.main}20`,
+            }}
+          />
+          <Typography color="primary">Votre réponse:</Typography>
+          <Typography color="primary">
+            {guest.adults > 0 && `${guest.adults} adultes`}
+          </Typography>
+          <Typography color="primary">
+            {guest.children > 0 && `${guest.children} enfants`}
+          </Typography>
+          <Typography color="primary" variant="body2" mt={2}>
+            Pour tout changement, envoyer un mail à{" "}
+            <Link href='mailto:vincent.racelle@gmail.com'>vincent.racelle@gmail.com</Link>
+          </Typography>
         </Box>
       )}
     </Box>

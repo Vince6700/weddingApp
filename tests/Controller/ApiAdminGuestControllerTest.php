@@ -218,7 +218,8 @@ class ApiAdminGuestControllerTest extends WebTestCase
                 "children": 2,
                 "drink": true,
                 "confirm": true,
-                "emailSent": true
+                "emailSent": true,
+                "responded": true
             }'
         );
 
@@ -232,6 +233,7 @@ class ApiAdminGuestControllerTest extends WebTestCase
         $this->assertEquals(2, $guestModified->getChildren());
         $this->assertEquals(true, $guestModified->getConfirm());
         $this->assertEquals(true, $guestModified->getEmailSent());
+        $this->assertEquals(true, $guestModified->getResponded());
         $this->assertResponseIsSuccessful();
     }
 

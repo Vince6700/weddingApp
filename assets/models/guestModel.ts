@@ -10,6 +10,7 @@ export interface IGuest {
   drink: boolean;
   confirm: boolean;
   emailSent: boolean;
+  responded: boolean;
 }
 
 export interface IGuestProviderState {
@@ -20,6 +21,13 @@ export interface IGuestProviderState {
 
 export interface IGuestContextValue {
   guest?: IGuest | null;
-  actions: { fetchGuest: Function };
+  actions: { fetchGuest: Function; respondToInvitation: Function };
   error: string | null;
+}
+
+export interface IGuestData {
+  adults: number;
+  children: number;
+  comments: string;
+  confirm: boolean;
 }
