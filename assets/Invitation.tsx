@@ -32,8 +32,6 @@ const Invitation = () => {
     history.push("/confirm-invitation");
   };
 
-  //TODO: display summary
-
   return (
     <Box>
       <Box mt={2} display="flex" justifyContent="center">
@@ -81,7 +79,7 @@ const Invitation = () => {
             {guest.children > 0 && `${guest.children} enfants`}
           </Typography>
           <Typography color="primary" variant="body2" mt={2}>
-            Pour tout changement, envoyer un mail à{" "}
+            Pour tout changement, envoyez un mail à{" "}
             <Link href='mailto:vincent.racelle@gmail.com'>vincent.racelle@gmail.com</Link>
           </Typography>
         </Box>

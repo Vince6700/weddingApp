@@ -65,9 +65,9 @@ class Guest
     private bool $emailSent=false;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", options={"default" : ""})
      */
-    private string $comments;
+    private string $comments="";
 
     /**
      * @ORM\Column(type="boolean", options={"default" : false})
