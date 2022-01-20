@@ -34,7 +34,7 @@ const Invitation = () => {
 
   return (
     <Box>
-      <Box mt={2} display="flex" justifyContent="center">
+      <Box mt={2} display="flex" justifyContent="center" mb={2}>
         <Typography component="h2" variant="h2" color="primary">
           Invitation
         </Typography>
@@ -53,11 +53,11 @@ const Invitation = () => {
       {!guest?.responded && (
         <Box display="flex" justifyContent="center" mt={4}>
           <Button
-            variant="contained"
+            variant="outlined"
             color="primary"
             onClick={onConfirmInvitation}
           >
-            Confirmer mon invitation
+            Répondre
           </Button>
         </Box>
       )}
@@ -80,7 +80,9 @@ const Invitation = () => {
           </Typography>
           <Typography color="primary" variant="body2" mt={2}>
             Pour tout changement, envoyez un mail à{" "}
-            <Link href='mailto:vincent.racelle@gmail.com'>vincent.racelle@gmail.com</Link>
+            <Link href="mailto:vincent.racelle@gmail.com">
+              vincent.racelle@gmail.com
+            </Link>
           </Typography>
         </Box>
       )}

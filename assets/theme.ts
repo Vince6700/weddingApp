@@ -3,9 +3,9 @@ import { ThemeOptions } from "@mui/material";
 export const themeOptions: ThemeOptions = {
   palette: {
     primary: {
-      main: "#c78f00",
-      light: "#febf43",
-      dark: "#916200",
+      main: "#cfd8dc",
+      light: "#ffffff",
+      dark: "#808e95",
     },
     secondary: {
       main: "#05445e",
@@ -21,15 +21,15 @@ export const themeOptions: ThemeOptions = {
     },
   },
   typography: {
-    fontFamily: "Quicksand",
+    fontFamily: "Quicksand, sans-serif",
     h1: {
-      fontFamily: "Stalemate",
+      fontFamily: "Smooch, cursive",
     },
     h2: {
-      fontFamily: "Stalemate",
+      fontFamily: "Quicksand, sans-serif",
     },
     h3: {
-      fontFamily: "Stalemate",
+      fontFamily: "Quicksand, sans-serif",
     },
     body1: {
       color: "#FFF",
@@ -39,7 +39,7 @@ export const themeOptions: ThemeOptions = {
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: "#febf4380",
+          borderColor: "#808e9590",
         },
       },
     },
@@ -47,10 +47,10 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           "&:before": {
-            borderTop: "thin solid #febf4380",
+            borderTop: "thin solid #808e95",
           },
           "&:after": {
-            borderTop: "thin solid #febf4380",
+            borderTop: "thin solid #808e95",
           },
         },
       },

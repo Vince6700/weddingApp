@@ -31,9 +31,6 @@ const Home = () => {
 
   return (
     <Box>
-      <Typography color="primary" sx={{ mb: 2 }}>
-        Entre ton adresse email
-      </Typography>
       <Box component="form" autoComplete="off" onSubmit={formik.handleSubmit}>
         <TextField
           id="email"
@@ -50,7 +47,7 @@ const Home = () => {
           }
           helperText={(formik.touched.email && formik.errors.email) || error}
         />
-        <Button variant="contained" type="submit" fullWidth>
+        <Button variant="outlined" type="submit" fullWidth>
           Voir mon invitation
         </Button>
       </Box>

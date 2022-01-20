@@ -187,7 +187,7 @@ const ConfirmInvitation = () => {
               />
             </Box>
             <Box display="flex" justifyContent="center">
-              <Button color="primary" variant="contained" type="submit">
+              <Button color="primary" variant="outlined" type="submit">
                 Répondre
               </Button>
             </Box>

@@ -73,11 +73,22 @@ const Layout = ({ children }: LayoutInterface) => {
                       justifyContent: "center",
                     }}
                   >
-                    Claudia & Vincent
+                    Claudia
+                    <Box
+                      sx={{
+                        display: "inline-block",
+                        color: "primary.dark",
+                        ml: 1,
+                        mr: 2,
+                      }}
+                    >
+                      &
+                    </Box>
+                    Vincent
                   </Typography>
                   <Typography
-                    component="h3"
-                    variant="h3"
+                    component="h4"
+                    variant="h4"
                     color="primary"
                     sx={{
                       flexBasis: "100%",
