@@ -71,12 +71,18 @@ const Layout = ({ children }: LayoutInterface) => {
                       flexBasis: "100%",
                       display: "flex",
                       justifyContent: "center",
+                      fontSize: {
+                        xs: "3rem",
+                        sm: "5rem",
+                        md: "4rem",
+                        lg: "4.5rem",
+                      },
                     }}
                   >
-                    Claudia
+                    <Box component="span">Claudia</Box>
                     <Box
+                      component="span"
                       sx={{
-                        display: "inline-block",
                         color: "primary.dark",
                         ml: 1,
                         mr: 2,
@@ -84,7 +90,7 @@ const Layout = ({ children }: LayoutInterface) => {
                     >
                       &
                     </Box>
-                    Vincent
+                    <Box component="span">Vincent</Box>
                   </Typography>
                   <Typography
                     component="h4"
