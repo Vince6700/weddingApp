@@ -98,7 +98,7 @@ const ConfirmInvitation = () => {
                   }}
                 />
               }
-              label="Je viens"
+              label="Je serai présent"
             />
             <FormControlLabel
               value={false}
@@ -112,7 +112,7 @@ const ConfirmInvitation = () => {
                   }}
                 />
               }
-              label="Je ne viens pas"
+              label="Je ne serai pas présent"
             />
           </RadioGroup>
         </FormControl>
@@ -162,7 +162,7 @@ const ConfirmInvitation = () => {
                 </FormHelperText>
               </FormControl>
               <Typography variant="caption" color="primary">
-                * moins de 15 ans
+                * moins de 12 ans
               </Typography>
             </Box>
           </>

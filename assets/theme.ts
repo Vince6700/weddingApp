@@ -26,6 +26,7 @@ export const themeOptions: ThemeOptions = {
       fontFamily: "Smooch, cursive",
     },
     h2: {
+      //todo responsive size for h2
       fontFamily: "Quicksand, sans-serif",
     },
     h3: {
