@@ -14,12 +14,14 @@ class GuestMailService
     protected string $adminEmail;
     protected MailerInterface $mailer;
     protected EntityManagerInterface $entityManager;
+    protected string $siteUrl;
 
-    public function __construct(string $adminEmail, MailerInterface $mailer, EntityManagerInterface $entityManager)
+    public function __construct(string $adminEmail, MailerInterface $mailer, EntityManagerInterface $entityManager, string $siteUrl)
     {
         $this->adminEmail = $adminEmail;
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
+        $this->siteUrl = $siteUrl;
     }
 
     /**
@@ -89,7 +91,9 @@ class GuestMailService
                 'name' => $guest->getName(),
                 'adults' => $guest->getAdults(),
                 'children' => $guest->getChildren(),
-                'drink' => $guest->getDrink()
+                'drink' => $guest->getDrink(),
+                'mail' => $guest->getEmail(),
+                'siteUrl' => $this->siteUrl
             ]);
     }
 }

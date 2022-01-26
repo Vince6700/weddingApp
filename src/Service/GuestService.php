@@ -95,6 +95,8 @@ class GuestService
         $guest->setAdults($data['adults'] ?? $guest->getAdults());
         $guest->setChildren($data['children'] ?? $guest->getChildren());
         $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
+        $guest->setResponded(true);
+        $guest->setComments($data['comments'] ?? '');
 
         $errors = $this->validator->validate($guest);
 
@@ -155,6 +157,7 @@ class GuestService
         $guest->setDrink($data['drink'] ?? $guest->getDrink());
         $guest->setEmailSent($data['emailSent'] ?? $guest->getEmailSent());
         $guest->setConfirm($data['confirm'] ?? $guest->getConfirm());
+        $guest->setResponded($data['responded'] ?? $guest->getResponded());
 
         $errors = $this->validator->validate($guest);
 

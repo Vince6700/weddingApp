@@ -27,3 +27,4 @@ services:
     App\Service\GuestMailService:
         arguments:
             $adminEmail: '%env(ADMIN_EMAIL)%'
+            $siteUrl: '%env(SITE_URL)%'
