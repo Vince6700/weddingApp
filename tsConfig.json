@@ -2,20 +2,5 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "jsx": "react"
-  },
-  "files": [
-    "guestClient.ts",
-    "invitationItem.tsx",
-    "Layout.tsx",
-    "guestProvider.tsx",
-    "useGuest.ts",
-    "useQuery.ts",
-    "guestModal.ts",
-    "app.tsx",
-    "ConfirmInvitation.tsx",
-    "Home.tsx",
-    "Index.tsx",
-    "Invitation.tsx",
-    "theme.ts"
-  ]
+  }
 }
