@@ -17,7 +17,7 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress",
-        "postinstall": "npm run build"
+        "postinstall": "npm run build tsc"
     },
     "engines": {
         "node": "14.x",
