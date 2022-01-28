@@ -6,7 +6,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react"
+    "jsx": "react",
+    "include": ["assets/**/*.ts"],
+    "exclude": ["node_modules"]
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"
