@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Theme, Typography } from "@mui/material";
 import backgroundImg from "../images/background.jpg";
 
 interface LayoutInterface {
