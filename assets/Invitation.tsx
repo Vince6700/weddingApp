@@ -35,7 +35,7 @@ const Invitation = () => {
   return (
     <Box>
       <Box mt={2} display="flex" justifyContent="center" mb={2}>
-        <Typography component="h2" variant="h2" color="primary">
+        <Typography component="h4" variant="h4" color="primary">
           Invitation
         </Typography>
       </Box>
