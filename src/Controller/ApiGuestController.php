@@ -22,7 +22,7 @@ class ApiGuestController extends AbstractController
     {
         $guest = $this->getDoctrine()
             ->getRepository(Guest::class)
-            ->findOneBy(['email' => $email]);
+            ->findOneBy(['email' => strtolower(trim($email))]);
 
         if (!$guest) {
             return $this->json('no guest found', Response::HTTP_NOT_FOUND);
