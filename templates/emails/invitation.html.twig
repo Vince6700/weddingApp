@@ -4,8 +4,6 @@
         body {
             margin: 0;
             font-family: 'Quicksand', sans-serif;
-            background-color: #121212;
-            color: #f8f8ff;
         }
         h1 {
             font-family: 'Smooch', cursive;
@@ -14,12 +12,16 @@
             margin-bottom: 15px;
         }
         img {
-            width: 100%;
+            width: 100vw;
         }
         a {
             color: #808e95;
             font-weight: bold;
             text-decoration: none;
+        }
+        .background {
+            background-color: #121212;
+            color: #f8f8ff;
         }
         .invitation-link {
             font-weight: 300;
@@ -44,38 +46,40 @@
             color: #808e95;
         }
     </style>
-    <div>
-        <img src="{{ email.image('@images/mail_banner.jpeg') }}" alt="Logo">
-    </div>
-    <div class="title_container">
-        <h1>Claudia <span class="and">&</span> Vincent</h1>
-    </div>
-    <div class="body_container">
-        <p>
-            Ont le plaisir de vous convier à leur mariage qui se tiendra le 4 juin 2022 à la ferme de Rawez à Saint-Vincent (Belgique).
-        </p>
-        {% if drink %}
+    <div class="background">
+        <div>
+            <img src="{{ email.image('@images/mail_banner.jpeg') }}" width="100%" alt="Logo">
+        </div>
+        <div class="title_container">
+            <h1>Claudia <span class="and">&</span> Vincent</h1>
+        </div>
+        <div class="body_container">
             <p>
-                Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur.
+                Ont le plaisir de vous convier à leur mariage qui se tiendra le 4 juin 2022 à la ferme de Rawez à Saint-Vincent (Belgique).
             </p>
-        {% else %}
+            {% if drink %}
+                <p>
+                    Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur.
+                </p>
+            {% else %}
+                <p>
+                    Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.
+                </p>
+            {% endif %}
             <p>
-                Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.
+                Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :
             </p>
-        {% endif %}
-        <p>
-            Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :
-        </p>
-        <p>
-            <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
-                Répondre à mon invitation
-            </a>
-        </p>
-        <p>
-            En cas de questions ou problème, envoyez un mail à
-            <a href="mailto:vincent.racelle@gmail.com">
-                vincent.racelle@gmail.com
-            </a>
-        </p>
+            <p>
+                <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
+                    Répondre à mon invitation
+                </a>
+            </p>
+            <p>
+                En cas de questions ou problème, envoyez un mail à
+                <a href="mailto:vincent.racelle@gmail.com">
+                    vincent.racelle@gmail.com
+                </a>
+            </p>
+        </div>
     </div>
 {% endapply %}
