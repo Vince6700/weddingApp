@@ -75,7 +75,7 @@ const ConfirmInvitation = () => {
   return (
     <Box>
       <Box display="flex" justifyContent="center" mb={2}>
-        <Typography variant="h2" component="h2" color="primary">
+        <Typography component="h4" variant="h4" color="primary">
           Ma réponse
         </Typography>
       </Box>

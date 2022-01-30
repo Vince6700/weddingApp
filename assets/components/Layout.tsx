@@ -112,7 +112,7 @@ const Layout = ({ children }: LayoutInterface) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item sm={12}>
+              <Grid item sm={12} sx={{ width: "100%" }}>
                 <Box
                   sx={{
                     margin: "0 2rem 2rem 2rem",
