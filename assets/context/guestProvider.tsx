@@ -5,6 +5,7 @@ import {
   IGuestProviderState,
 } from "../models/guestModel";
 import { fetchGuestByEmail, modifyGuestById } from "../clients/guestClient";
+import useMountedRef from "../hooks/useMountedRef";
 
 interface IGuestContext {
   children?: React.ReactNode;
@@ -25,22 +26,25 @@ const GuestProvider = ({ children }: IGuestContext) => {
     guest: null,
     error: null,
   });
+  const mountedRef = useMountedRef();
 
   const fetchGuest = async (email: string) => {
     try {
       const res = await fetchGuestByEmail(email);
-      setState((state: IGuestProviderState) => ({
-        ...state,
-        guest: res.data,
-        error: null,
-      }));
+      if (mountedRef.current) {
+        setState((state: IGuestProviderState) => ({
+          ...state,
+          guest: res.data,
+          error: null,
+        }));
+      }
     } catch (error: any) {
-      if (error.response.status === 404) {
+      if (error.response.status === 404 && mountedRef.current) {
         setState((state: IGuestProviderState) => ({
           ...state,
           error: "Email introuvable",
         }));
-      } else if (error.response) {
+      } else if (error.response && mountedRef) {
         setState((state: IGuestProviderState) => ({
           ...state,
           error: error.response.data,
@@ -57,12 +61,12 @@ const GuestProvider = ({ children }: IGuestContext) => {
     try {
       await modifyGuestById({ id: state.guest?.id, guestData });
     } catch (error: any) {
-      if (error.response.status === 404) {
+      if (error.response.status === 404 && mountedRef.current) {
         setState((state: IGuestProviderState) => ({
           ...state,
           error: "erreur: vueillez contacter: vincent.racelle@gmail.com",
         }));
-      } else if (error.response) {
+      } else if (error.response && mountedRef.current) {
         setState((state: IGuestProviderState) => ({
           ...state,
           error: error.response.data,
