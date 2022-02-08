@@ -7,7 +7,11 @@
         }
         table {
             border-collapse: collapse;
+            padding: 0;
+            margin: 0;
+            border: none;
             border-spacing: 0;
+            vertical-align: top;
         }
         h1 {
             font-family: 'Smooch', cursive;
@@ -16,7 +20,9 @@
             margin-bottom: 15px;
         }
         img {
-            width: 100vw;
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
         a {
             color: #808e95;
@@ -46,33 +52,33 @@
     <table>
         <thead>
         <tr>
-            <th colspan="1" style="width: 15%;"></th>
-            <th colspan="1" style="width: 70%;"></th>
-            <th colspan="1" style="width: 15%;"></th>
+            <th style="width: 100%;"></th>
         </tr>
         </thead>
         <tbody>
             <tr>
-                <td></td>
                 <td class="background">
-                    <img src="{{ email.image('@images/mail_banner.jpeg') }}" width="100%" alt="Logo">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td style="width: 100%">
+                                <img src="{{ email.image('@images/mail_banner.jpeg') }}" alt="Logo">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </td>
-                <td></td>
             </tr>
             <tr>
-                <td></td>
                 <td class="background cellText">
                     <h1>Claudia <span class="and">&</span> Vincent</h1>
                 </td>
-                <td></td>
             </tr>
             <tr>
             <tr>
-                <td></td>
                 <td class="background cellText">
                     Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur.
                 </td>
-                <td></td>
             </tr>
                 {% if drink %}
                     <tr>
@@ -80,32 +86,25 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td></td>
                         <td class="background cellText">Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.</td>
-                        <td></td>
                     </tr>
                 {% endif %}
                 <tr>
-                    <td></td>
                     <td class="background cellText">Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :</td>
-                    <td></td>
                 </tr>
                 <tr>
-                    <td></td>
                     <td class="background cellText">
                         <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
                         Répondre à mon invitation
                         </a>
                     </td>
-                    <td></td>
                 </tr>
                 <tr>
-                    <td></td>
                     <td class="background cellText"> En cas de questions ou problème, envoyez un mail à
                         <a href="mailto:vincent.racelle@gmail.com">
                             vincent.racelle@gmail.com
-                        </a></td>
-                   <td></td>
+                        </a>
+                    </td>
                 </tr>
         </tbody>
     </table>
