@@ -5,6 +5,10 @@
             margin: 0;
             font-family: 'Quicksand', sans-serif;
         }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
         h1 {
             font-family: 'Smooch', cursive;
             font-size: 60px;
@@ -19,6 +23,10 @@
             font-weight: bold;
             text-decoration: none;
         }
+        .cellText {
+            text-align: center;
+            padding: 14px;
+        }
         .background {
             background-color: #121212;
             color: #f8f8ff;
@@ -31,55 +39,75 @@
             border-radius: 4px;
             border: 1px solid #808e95;
         }
-        .title_container {
-            display: flex;
-            justify-content: center;
-        }
-        .body_container {
-            padding: 1em;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-        }
         .and {
             color: #808e95;
         }
     </style>
-    <div class="background">
-        <div>
-            <img src="{{ email.image('@images/mail_banner.jpeg') }}" width="100%" alt="Logo">
-        </div>
-        <div class="title_container">
-            <h1>Claudia <span class="and">&</span> Vincent</h1>
-        </div>
-        <div class="body_container">
-            <p>
-                Ont le plaisir de vous convier à leur mariage qui se tiendra le 4 juin 2022 à la ferme de Rawez à Saint-Vincent (Belgique).
-            </p>
-            {% if drink %}
-                <p>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="1" style="width: 15%;"></th>
+            <th colspan="1" style="width: 70%;"></th>
+            <th colspan="1" style="width: 15%;"></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td class="background">
+                    <img src="{{ email.image('@images/mail_banner.jpeg') }}" width="100%" alt="Logo">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="background cellText">
+                    <h1>Claudia <span class="and">&</span> Vincent</h1>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+            <tr>
+                <td></td>
+                <td class="background cellText">
                     Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur.
-                </p>
-            {% else %}
-                <p>
-                    Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.
-                </p>
-            {% endif %}
-            <p>
-                Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :
-            </p>
-            <p>
-                <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
-                    Répondre à mon invitation
-                </a>
-            </p>
-            <p>
-                En cas de questions ou problème, envoyez un mail à
-                <a href="mailto:vincent.racelle@gmail.com">
-                    vincent.racelle@gmail.com
-                </a>
-            </p>
-        </div>
-    </div>
+                </td>
+                <td></td>
+            </tr>
+                {% if drink %}
+                    <tr>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td></td>
+                        <td class="background cellText">Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.</td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td></td>
+                    <td class="background cellText">Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="background cellText">
+                        <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
+                        Répondre à mon invitation
+                        </a>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="background cellText"> En cas de questions ou problème, envoyez un mail à
+                        <a href="mailto:vincent.racelle@gmail.com">
+                            vincent.racelle@gmail.com
+                        </a></td>
+                   <td></td>
+                </tr>
+        </tbody>
+    </table>
+
 {% endapply %}
