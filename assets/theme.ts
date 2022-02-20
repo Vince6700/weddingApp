@@ -47,9 +47,15 @@ export const themeOptions: ThemeOptions = {
     },
     h4: {
       fontSize: "3rem",
-      '@media (max-width:480px)': {
-        fontSize: "2rem"
-      }
+      "@media (max-width:480px)": {
+        fontSize: "2rem",
+      },
+    },
+    h5: {
+      fontSize: "2rem",
+      "@media (max-width:480px)": {
+        fontSize: "1.5rem",
+      },
     },
     body1: {
       color: "#FFF",

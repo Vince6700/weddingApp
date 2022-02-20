@@ -36,22 +36,50 @@ const Invitation = () => {
 
   return (
     <Box>
-      <Box mt={2} display="flex" justifyContent="center" mb={2}>
-        <Typography component="h4" variant="h4" color="primary">
-          Invitation
-        </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          mb: 2,
+          mt: 2,
+        }}
+      >
+        <Box>
+          <Typography component="h4" variant="h4" color="primary">
+            Invitation
+          </Typography>
+        </Box>
+        <Box>
+          <Typography component="h5" variant="h5" color="primary">
+            {guest?.drink && "Vin d'honneur"}
+          </Typography>
+        </Box>
       </Box>
-      <InvitationItem title="Cérémonie" description="13H à la ferme de Rawez" />
-      <InvitationItem title="Apéritif" description="14H à la ferme de Rawez" />
       {!guest?.drink && (
-        <>
-          <InvitationItem title="Repas" description="17H à la ferme de Rawez" />
-          <InvitationItem
-            title="Soirée"
-            description="21H à la ferme de Rawez"
-          />
-        </>
+        <InvitationItem title="Quoi ?" icon={"📜"}>
+          Cérémonie laïque
+          <br />
+          Vin d'honneur
+          <br />
+          Diner
+          <br />
+          Soirée endiablée
+        </InvitationItem>
       )}
+      {guest?.drink && (
+        <InvitationItem title="Quoi ?" icon={"📜"}>
+          Vin d'honneur
+        </InvitationItem>
+      )}
+      <InvitationItem title="Où ?" icon={"📍"}>
+        Ferme de Rawez <br /> 1 rue de Rawez, B-6730 Saint-Vincent
+      </InvitationItem>
+      <InvitationItem title="A quelle heure ?" icon={"⏱"}>
+        {guest?.drink && "16h"}
+        {!guest?.drink && "14h30"}
+      </InvitationItem>
       {!guest?.responded && (
         <Box display="flex" justifyContent="center" mt={4}>
           <Button
