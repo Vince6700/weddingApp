@@ -7,7 +7,7 @@ interface IInvitationItem {
 }
 
 const InvitationItem = ({ title, description }: IInvitationItem) => {
-    return (
+  return (
     <Box mb={2}>
       <Divider color="primary">
         <Typography component="h3" variant="h6" color="primary">

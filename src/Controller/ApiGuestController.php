@@ -46,6 +46,14 @@ class ApiGuestController extends AbstractController
             return $this->json('no data to update', Response::HTTP_BAD_REQUEST);
         }
 
+        if ($data["confirm"] === "true") {
+            $data["confirm"] = true;
+        }
+
+        if ($data["confirm"] === "false") {
+            $data["confirm"] = false;
+        }
+
         try {
             $guest = $guestService->updateGuest($id, $data);
             $guestMailService->sendUpdateConfirmation($guest);

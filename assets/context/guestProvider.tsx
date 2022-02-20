@@ -64,7 +64,7 @@ const GuestProvider = ({ children }: IGuestContext) => {
       if (error.response.status === 404 && mountedRef.current) {
         setState((state: IGuestProviderState) => ({
           ...state,
-          error: "erreur: vueillez contacter: vincent.racelle@gmail.com",
+          error: "erreur: veuillez contacter: vincent.racelle@gmail.com",
         }));
       } else if (error.response && mountedRef.current) {
         setState((state: IGuestProviderState) => ({

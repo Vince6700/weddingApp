@@ -32,6 +32,8 @@ const Invitation = () => {
     history.push("/confirm-invitation");
   };
 
+  /** todo what if I don't go*/
+
   return (
     <Box>
       <Box mt={2} display="flex" justifyContent="center" mb={2}>
