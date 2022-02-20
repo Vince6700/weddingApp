@@ -40,11 +40,16 @@ export const themeOptions: ThemeOptions = {
       fontFamily: "Smooch, cursive",
     },
     h2: {
-      //todo responsive size for h2
       fontFamily: "Quicksand, sans-serif",
     },
     h3: {
       fontFamily: "Quicksand, sans-serif",
+    },
+    h4: {
+      fontSize: "3rem",
+      '@media (max-width:480px)': {
+        fontSize: "2rem"
+      }
     },
     body1: {
       color: "#FFF",
