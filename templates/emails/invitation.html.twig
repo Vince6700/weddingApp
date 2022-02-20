@@ -4,11 +4,12 @@
         body {
             margin: 0;
             font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
         }
         table {
             border-collapse: collapse;
             padding: 0;
-            margin: 0;
+            margin: 0 auto;
             border: none;
             border-spacing: 0;
             vertical-align: top;
@@ -17,7 +18,14 @@
             font-family: 'Smooch', cursive;
             font-size: 60px;
             color: #cfd8dc;
-            margin-bottom: 15px;
+            margin-bottom: 0;
+        }
+        h4 {
+            font-family: 'Smooch', cursive;
+            font-size: 40px;
+            color: #cfd8dc;
+            margin-top: 0;
+            margin-bottom: 20px;
         }
         img {
             max-width: 100%;
@@ -48,6 +56,23 @@
         .and {
             color: #808e95;
         }
+        .last-row {
+            padding-bottom: 50px;
+        }
+        .emoji {
+            font-size: 22px;
+        }
+        @media only screen and (max-width: 768px)  {
+            h1 {
+                font-size: 40px !important;
+            }
+            h4 {
+                font-size: 20px !important;
+            }
+            .cellText {
+                font-size: 14px !important;
+            }
+        }
     </style>
     <table>
         <thead>
@@ -75,34 +100,87 @@
                 </td>
             </tr>
             <tr>
-            <tr>
                 <td class="background cellText">
-                    Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur.
+                    <h4>👰 4 juin 2022 🤵</h4>
                 </td>
             </tr>
                 {% if drink %}
                     <tr>
-
+                        <td class="background cellText">
+                            <div class="emoji">🥂</div>
+                             <p>
+                                 Ont le plaisir de vous inviter au vin d'honneur de leur mariage.<br />
+                                 Ils vous attendent à partir de 16h jusqu'à 18h.
+                             </p>
+                        </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td class="background cellText">Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.</td>
+                        <td class="background cellText">
+                            <div class="emoji">🍾 💃 🕺</div>
+                            <p>
+                                Ont le plaisir de vous inviter à la célébration de leur mariage.<br />
+                                Ils vous attendent à 15h pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.
+                            </p>
+                        </td>
                     </tr>
                 {% endif %}
                 <tr>
-                    <td class="background cellText">Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :</td>
+                    <td class="background cellText">
+                        <div class="emoji">📍</div>
+                        <p>
+                            Les festivités auront lieu à la Ferme de Rawez, 1 rue de Rawez à Saint-Vincent (BE).
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="background cellText">
+                        <div class="emoji">🗓</div>
+                        <p>
+                            Afin de préserver leurs nerfs fragiles, merci de confirmer votre venue avant le 1er mai via la lien suivant :
+                        </p>
+                    </td>
                 </tr>
                 <tr>
                     <td class="background cellText">
                         <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
-                        Répondre à mon invitation
+                            Répondre à mon invitation
                         </a>
                     </td>
                 </tr>
                 <tr>
-                    <td class="background cellText"> En cas de questions ou problème, envoyez un mail à
+                    <td class="background cellText">
+                        <div class="emoji">🎁</div>
+                        <p>
+                           Pour ceux qui le souhaitent, nous avons ouvert une cagnotte en ligne.
+                        </p>
+                        <p>
+                            Une urne sera également disponible sur place le jour J pour les plus traditionnels d'entre vous
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="background cellText">
+                        <a href="https://www.leetchi.com/c/mariage-claudiagillard-vincentracelle?utm_source=facebook&utm_medium=social_sharing&fbclid=IwAR1EWcyOr5q6vTa3FqRYKi1Z8g1soadb8bunHthx-Sbd9-MqCyarjmVnZBM"
+                           target="_blank"
+                           class="invitation-link"
+                        >
+                            Participer à la cagnotte
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="background cellText last-row">
+                        <div class="emoji">📧</div>
+                        <p>
+                            En cas de questions ou de problèmes, envoyez un mail à
+                        </p>
                         <a href="mailto:vincent.racelle@gmail.com">
                             vincent.racelle@gmail.com
+                        </a>
+                       <span>&nbsp;ou&nbsp;</span>
+                        <a href="mailto:claudia.gillard@hotmail.com">
+                            claudia.gillard@hotmail.com
                         </a>
                     </td>
                 </tr>

@@ -84,7 +84,7 @@ class GuestMailService
         return (new TemplatedEmail())
             ->from($this->adminEmail)
             ->to($guest->getEmail())
-            ->subject('Le mariage des Bibiches')
+            ->subject('Invitation - Mariage de Claudia & Vincent')
             ->htmlTemplate($template)
             ->context([
                 'firstName' => $guest->getFirstName(),
