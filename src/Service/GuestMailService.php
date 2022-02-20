@@ -29,7 +29,7 @@ class GuestMailService
      */
     public function sendUpdateConfirmation(Guest $guest): void
     {
-        $email = $this->buildEmail($guest, 'emails/confirmation.html.twig');
+        $email = $this->buildEmail($guest, 'emails/confirmation.html.twig', 'Confirmation - Mariage de Claudia & Vincent');
 
         $this->mailer->send($email);
     }
@@ -48,7 +48,7 @@ class GuestMailService
             if (!$guest) {
                 $errors[] = $id;
             } else {
-                $email = $this->buildEmail($guest, 'emails/invitation.html.twig');
+                $email = $this->buildEmail($guest, 'emails/invitation.html.twig', 'Invitation - Mariage de Claudia & Vincent');
                 $this->mailer->send($email);
                 $guest->setEmailSent(true);
                 $this->entityManager->flush();
@@ -70,7 +70,7 @@ class GuestMailService
         $guests = $this->entityManager->getRepository(Guest::class)->findBy(['emailSent' => false]);
 
         foreach ($guests as $guest) {
-            $email = $this->buildEmail($guest, 'emails/invitation.html.twig');
+            $email = $this->buildEmail($guest, 'emails/invitation.html.twig', 'Invitation - Mariage de Claudia & Vincent');
             $this->mailer->send($email);
             $guest->setEmailSent(true);
             $this->entityManager->flush();
@@ -79,12 +79,12 @@ class GuestMailService
         return $guests;
     }
 
-    protected function buildEmail(Guest $guest, string $template): TemplatedEmail
+    protected function buildEmail(Guest $guest, string $template, string $subject): TemplatedEmail
     {
         return (new TemplatedEmail())
             ->from($this->adminEmail)
             ->to($guest->getEmail())
-            ->subject('Invitation - Mariage de Claudia & Vincent')
+            ->subject($subject)
             ->htmlTemplate($template)
             ->context([
                 'firstName' => $guest->getFirstName(),
@@ -93,7 +93,8 @@ class GuestMailService
                 'children' => $guest->getChildren(),
                 'drink' => $guest->getDrink(),
                 'mail' => $guest->getEmail(),
-                'siteUrl' => $this->siteUrl
+                'siteUrl' => $this->siteUrl,
+                'confirm' => $guest->getConfirm()
             ]);
     }
 }
