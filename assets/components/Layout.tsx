@@ -100,12 +100,6 @@ const Layout = ({ children }: LayoutInterface) => {
                       flexBasis: "100%",
                       display: "flex",
                       justifyContent: "center",
-                      fontSize: {
-                        xs: "2rem",
-                        sm: "4.5rem",
-                        md: "3.5rem",
-                        lg: "4rem",
-                      },
                     }}
                   >
                     4 juin 2022

@@ -1,37 +1,227 @@
 {% apply inline_css %}
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&family=Smooch&display=swap');
         body {
             margin: 0;
-            font-family: 'Zen Kaku Gothic Antique', sans-serif;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+        }
+        table {
+            border-collapse: collapse;
+            padding: 0;
+            margin: 0 auto;
+            border: none;
+            border-spacing: 0;
+            vertical-align: top;
         }
         h1 {
-            color: #333;
+            font-family: 'Smooch', cursive;
+            font-size: 60px;
+            color: #cfd8dc;
+            margin-bottom: 0;
+        }
+        h4 {
+            font-size: 40px;
+            color: #cfd8dc;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 300;
         }
         img {
-            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
-        .title_container {
-            display: flex;
-            justify-content: center;
+        a {
+            color: #808e95;
+            font-weight: bold;
+            text-decoration: none;
         }
-        .body_container {
-            padding: 1em;
-            display: flex;
-            justify-content: center;
+        .cellText {
+            text-align: center;
+            padding: 14px;
+        }
+        .background {
+            background-color: #121212;
+            color: #f8f8ff;
+        }
+        .invitation-link {
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #808e95;
+        }
+        .and {
+            color: #808e95;
+        }
+        .last-row {
+            padding-bottom: 50px;
+        }
+        .emoji {
+            font-size: 22px;
+        }
+        @media only screen and (max-width: 768px)  {
+            h1 {
+                font-size: 40px !important;
+            }
+            h4 {
+                font-size: 20px !important;
+            }
+            .cellText {
+                font-size: 14px !important;
+            }
         }
     </style>
-    <div>
-        <img src="{{ email.image('@images/mail_banner.jpeg') }}" alt="Logo">
-    </div>
-    <div class="title_container">
-        <h1>Merci {{ firstName }}, pour ta venue au mariage des Bibiches</h1>
-    </div>
-    <div class="body_container">
-        {% if drink %}
-            test
-        {% else %}
-            repas
+    <table>
+        <thead>
+        <tr>
+            <th style="width: 100%;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="background">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td style="width: 100%">
+                            <img src="{{ email.image('@images/mail_banner.jpeg') }}" alt="Logo">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="background cellText">
+                <h1>Claudia <span class="and">&</span> Vincent</h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="background cellText">
+                <h4>👰 4 juin 2022 🤵</h4>
+            </td>
+        </tr>
+        {% if not confirm %}
+            <tr>
+                <td class="background cellText">
+                    <div class="emoji">😢</div>
+                    <p>
+                        Merci d'avoir répondu à notre invitation.<br/>
+                        Nous sommes tristes de ne pas vous compter parmi nous, mais ce n'est que partie remise.
+                    </p>
+                </td>
+            </tr>
         {% endif %}
-    </div>
+        {% if confirm  %}
+            <tr>
+                <td class="background cellText">
+                    <div class="emoji">🙏</div>
+                    <p>
+                        Merci d'avoir répondu à notre invitation. Nous nous réjouissons de votre présence.
+                    </p>
+                </td>
+            </tr>
+            {% if drink %}
+                <tr>
+                    <td class="background cellText">
+                        <div class="emoji">🥂</div>
+                        <p>
+                            Vous êtes attendus à partir de <strong>16h</strong> jusqu'à 18h.
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if not drink %}
+                <tr>
+                    <td class="background cellText">
+                        <div class="emoji">🍾 💃 🕺</div>
+                        <p>
+                            Vous êtes attendus à <strong>15h</strong> pour la cérémonie laïque qui sera suivie d'un vin d'honneur et d'un diner.
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="background cellText">
+                    <div class="emoji">📌</div>
+                    <p>
+                        {{ adults }} adulte{% if adults > 1 %}s{% endif %}
+                        {% if children > 0 %}
+                            et {{ children }} enfant{% if children > 1 %}s{% endif %}
+                        {% endif %}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="background cellText">
+                    <div class="emoji">📍</div>
+                    <p>
+                        Les festivités auront lieu à la Ferme de Rawez, <strong>1 rue de Rawez à Saint-Vincent (BE)</strong>.
+                    </p>
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="background cellText">
+                <div class="emoji">🎁</div>
+                <p>
+                    {% if confirm %}
+                        Pour ceux qui le souhaitent, une cagnotte en ligne a été ouverte.
+                    {% endif %}
+                    {% if not confirm %}
+                        Si vous souhaitez tout de même participer à notre cagnotte, le lien se trouve ci-dessous :
+                    {% endif %}
+                </p>
+                {% if confirm %}
+                    <p>
+                        Une urne sera également disponible sur place le jour J pour les plus traditionnels d'entre vous.
+                    </p>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="background cellText">
+                <a href="https://www.leetchi.com/c/mariage-claudiagillard-vincentracelle?utm_source=facebook&utm_medium=social_sharing&fbclid=IwAR1EWcyOr5q6vTa3FqRYKi1Z8g1soadb8bunHthx-Sbd9-MqCyarjmVnZBM"
+                   target="_blank"
+                   class="invitation-link"
+                >
+                    Participer à la cagnotte
+                </a>
+            </td>
+        </tr>
+        {% if confirm %}
+            <tr>
+                <td class="background cellText">
+                    <div class="emoji">📜</div>
+                    <p>Vous pouvez à tout moment voir votre invitation à partir du lien ci-dessous :</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="background cellText">
+                    <a href="{{ siteUrl }}/invitation?email={{ mail }}" target="_blank" class="invitation-link">
+                        consulter mon invitation
+                    </a>
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="background cellText last-row">
+                <div class="emoji">📧</div>
+                <p>
+                    En cas de questions, changements ou problèmes, envoyez un mail à
+                </p>
+                <a href="mailto:vincent.racelle@gmail.com">
+                    vincent.racelle@gmail.com
+                </a>
+                <span>&nbsp;ou&nbsp;</span>
+                <a href="mailto:claudia.gillard@hotmail.com">
+                    claudia.gillard@hotmail.com
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 {% endapply %}

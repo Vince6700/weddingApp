@@ -1,5 +1,3 @@
-import { fetchGuestByEmail } from "../clients/guestClient";
-
 export interface IGuest {
   id: number;
   email: string;
