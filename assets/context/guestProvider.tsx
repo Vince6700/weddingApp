@@ -18,6 +18,7 @@ export const GuestContext = createContext<IGuestContextValue>({
   },
   guest: null,
   error: null,
+  isLoading: false,
 });
 
 const GuestProvider = ({ children }: IGuestContext) => {
@@ -25,11 +26,13 @@ const GuestProvider = ({ children }: IGuestContext) => {
     email: null,
     guest: null,
     error: null,
+    isLoading: false,
   });
   const mountedRef = useMountedRef();
 
   const fetchGuest = async (email: string) => {
     try {
+      setState((state) => ({ ...state, isLoading: true }));
       const res = await fetchGuestByEmail(email);
       if (mountedRef.current) {
         setState((state: IGuestProviderState) => ({
@@ -54,11 +57,15 @@ const GuestProvider = ({ children }: IGuestContext) => {
       } else {
         console.error("Error", error.message);
       }
+    } finally {
+      mountedRef.current &&
+        setState((state) => ({ ...state, isLoading: false }));
     }
   };
 
   const respondToInvitation = async (guestData: IGuestData) => {
     try {
+      setState((state) => ({ ...state, isLoading: true }));
       await modifyGuestById({ id: state.guest?.id, guestData });
     } catch (error: any) {
       if (error.response.status === 404 && mountedRef.current) {
@@ -76,6 +83,9 @@ const GuestProvider = ({ children }: IGuestContext) => {
       } else {
         console.error("Error", error.message);
       }
+    } finally {
+      mountedRef.current &&
+        setState((state) => ({ ...state, isLoading: true }));
     }
   };
 
@@ -83,6 +93,7 @@ const GuestProvider = ({ children }: IGuestContext) => {
     actions: { fetchGuest, respondToInvitation },
     guest: state?.guest,
     error: state?.error,
+    isLoading: state.isLoading,
   };
 
   return (

@@ -1,12 +1,21 @@
 import React from "react";
-import { Box, Grid, Theme, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "@mui/material";
 import backgroundImg from "../images/background.jpg";
+import useGuest from "../hooks/useGuest";
 
 interface LayoutInterface {
   children?: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutInterface) => {
+  const { isLoading } = useGuest();
+
   return (
     <Box
       sx={{
@@ -126,6 +135,12 @@ const Layout = ({ children }: LayoutInterface) => {
           </Box>
         </Grid>
       </Grid>
+      <Backdrop
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color="primary" />
+      </Backdrop>
     </Box>
   );
 };

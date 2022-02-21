@@ -15,12 +15,14 @@ export interface IGuestProviderState {
   email: string | null;
   guest: IGuest | null;
   error: string | null;
+  isLoading: boolean;
 }
 
 export interface IGuestContextValue {
   guest?: IGuest | null;
   actions: { fetchGuest: Function; respondToInvitation: Function };
   error: string | null;
+  isLoading: boolean;
 }
 
 export interface IGuestData {
