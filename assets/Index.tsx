@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import GuestProvider from "./context/guestProvider";
 import Invitation from "./Invitation";
 import ConfirmInvitation from "./ConfirmInvitation";
+import NotFound from "./NotFound";
 
 const Index = () => {
   const theme = createTheme(themeOptions);
@@ -25,6 +26,9 @@ const Index = () => {
               </Route>
               <Route exact path="/confirm-invitation">
                 <ConfirmInvitation />
+              </Route>
+              <Route>
+                <NotFound />
               </Route>
             </Switch>
           </RouterDom>
